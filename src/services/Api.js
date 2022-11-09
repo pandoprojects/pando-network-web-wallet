@@ -148,21 +148,13 @@ export default class Api {
     static fetchStakes(address) {
         return axios.get(`${explorerApiUri}/stake/${address}`).then(data => data.data);
 
-        // let path = `get-stake-history?wallet=${address}`;
-        // return GET(path, null, queryParams);
     }
-    // static getWalletBalance(address) {
-    //     return axios.get(`https://prodexplorerapi.pandoproject.org/api/overallBalance/${address}`).then((data) => data.data)
-    // }
 
     static getWalletBalance(address) {
         return axios.get(`${explorerApiUri}/account/update/${address}`).then((data) => data.data)
     }
     static fetchRewards(address) {
         return axios.get(`${explorerApiUri}/rewards/${address}`).then(data => data.data);
-
-        // let path = `get-stake-history?wallet=${address}`;
-        // return GET(path, null, queryParams);
     }
 
     static getTransactionHistory(address) {//to be changed
@@ -170,12 +162,6 @@ export default class Api {
     }
 
     
-    // static overallBalance(wallet) {
-    //     return axios.get(`${explorerApiUri}/overallBalance/${wallet}`).then(data => data.data);
-    // }
-
-
-
     static getSequence(address) {
         return axios.get(`${explorerApiUri}/account/update/${address}`).then(data => data.data);
 
@@ -186,9 +172,6 @@ export default class Api {
         return axios.get(`${explorerApiUri}/staketype/${address}`).then(data => data.data);
       
     }
-
-
-
 
 
     //
