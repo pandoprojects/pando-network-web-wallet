@@ -4,15 +4,22 @@ Reference implementation of the Pando Web Wallet. In addition to the standard wa
 
 
 ### Setup
+#### Take clone of this repo
 
 <!-- This will create the node_module folder of the project -->
-```npm install --legacy-peer-deps```
+
+```
+npm install --legacy-peer-deps
+```
 
 ### Run the application
 
-```npm start```
+```
+npm start
+```
 
 Runs the app in the development mode.<br>
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
@@ -21,20 +28,23 @@ You will also see any lint errors in the console.
 
 ### Build Application
 
-```npm build```
+```
+npm build
+```
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
 
-## Accessing your Pando network Web Wallet
+For more detail about projects please go thourgh our [official Documenation](https://docs.pandoproject.org/)
 
-In order to access the wallet we first need to create the wallet.Use your own private password,It will download the mnemonic phrase.Preserve the crededntials.Now unlocking the wallet is done by using any of the means.
+## API Reference
+This is the Explorer API reference link [Click here](https://chainapi.pandoproject.org/)
 
-On sucessful login you will land over the dashboard
-Now here you will get your wallet transaction id and the available found in PTX format
-In Dashboard you will found the different options like wallet ,reward,stakes,contract and logout button functionalities
+## License
+
+The Explorer backend application reference implementation is licensed under the [GNU License](https://github.com/pandoprojects/pando-network-web-wallet/blob/main/LICENSE)
 
 
 
