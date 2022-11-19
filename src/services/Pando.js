@@ -37,15 +37,8 @@ export default class Pando {
         let { tokenType, from, to, amount, transactionFee } = txData;
        
         transactionFee = transactionFee
-     
-        if(amount < 10)
-        {
-            transactionFee = 30;
+        transactionFee = 3;
           
-        }
-        else{
-            transactionFee = 30 + transactionFee
-        }
         const ten18 = (new BigNumber(10)).pow(18);
         const ten16 = (new BigNumber(10)).pow(16);
         const pandoWeiToSend = (tokenType === 'PTX' ? (new BigNumber(0)).multipliedBy(ten18) : (new BigNumber(0)));
@@ -75,11 +68,7 @@ export default class Pando {
 
         let { tokenType, from, holder, amount, transactionFee, purpose } = txData;
        
-        transactionFee = transactionFee * (100*this.getTransactionFee());
-        if(transactionFee < 0.03)
-        {
-            transactionFee = 0.03
-        }
+       
         const ten18 = (new BigNumber(10)).pow(18); // 10^18, 1  = 10^18 , 1 Gamma = 10^ 
         const pandoWeiToSend = (tokenType === 'PTX' ? (new BigNumber(amount)).multipliedBy(ten18) : (new BigNumber(0)));
         const feeInPTOWei = transactionFee // Any fee >= 10^12  should work, higher fee yields higher priority
@@ -100,11 +89,6 @@ export default class Pando {
 
     static unsignedWithdrawStakeTx(txData, sequence) {
         let { tokenType, from, holder, transactionFee, purpose } = txData;
-        transactionFee = transactionFee * (100*this.getTransactionFee());
-            if(transactionFee < 0.03)
-            {
-                transactionFee = 0.03
-            }
         const ten18 = (new BigNumber(10)).pow(18); // 10^18, 1  = 10^18 , 1 Gamma = 10^ 
         const feeInPTOWei = transactionFee; // Any fee >= 10^12  should work, higher fee yields higher priority
         const source = from;

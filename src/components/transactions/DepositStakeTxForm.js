@@ -17,8 +17,8 @@ import { getMinStakeAmount } from "../../Flags";
 import API from '../../services/Api';
 import Wallet from '../../services/Wallet';
 import { withTranslation } from 'react-i18next';
-
-const TRANSACTION_FEE = 0.03;
+import config from '../../Config';
+const TRANSACTION_FEE = config.transactionFee;
 
 
 // This component is used for the functionality in the Deposit stake button under the stake menu
@@ -307,9 +307,11 @@ class DepositStakeTxForm extends React.Component {
 
         API.getWalletBalance(address).then(res => {
 
-            if (res.body && res.body.balance && res.body.balance.ptxwei) {
-
-                let bal = Number(res.body.balance.ptxwei / 1000000000000000000);
+            if (res.body && res.body.balance ) {
+                const newObj = Object.fromEntries(
+                    Object.entries(res.body.balance).map(([k, v]) => [k.toLowerCase(), v])
+                  );
+                let bal = Number(newObj.ptxwei / 1000000000000000000);
 
 
                 this.setState({ walletAmount: bal });
@@ -425,7 +427,7 @@ class DepositStakeTxForm extends React.Component {
                 <FormInputContainer title={holderTitle}
                     error={toError}>
                     <input className="BottomBorderInput"
-                        autocomplete="off"
+                        autoComplete="off"
                         name="holder"
                         placeholder={holderPlaceholder}
                         value={this.state.holder}
@@ -435,7 +437,7 @@ class DepositStakeTxForm extends React.Component {
                     error={amountError}>
                     <input className="BottomBorderInput" value={this.state.amount}
                         name="amount"
-                        autocomplete="off"
+                        autoComplete="off"
                         placeholder="Enter amount to stake"
                         onChange={this.handleChange}
                         type="number"

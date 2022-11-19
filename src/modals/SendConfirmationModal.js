@@ -14,7 +14,7 @@ import Alerts from '../services/Alerts';
 import Router from '../services/Router';
 import { withTranslation } from 'react-i18next';
 import pando from '../services/Pando';
-
+import config from '../Config';
 
 class SendConfirmationModal extends React.Component {
     constructor() {
@@ -91,6 +91,7 @@ class SendConfirmationModal extends React.Component {
                               
                                 Alerts.showSuccess(t(`TRANSACTION SUCCESSFULINSUFFICIENT FEE. TRANSACTION FEE NEEDS TO BE AT LEAST 0.03 PTX`));;
                                 this.setState({ isloading: false });
+                                store.dispatch(hideModals());
                             }
                         })
 
@@ -112,13 +113,8 @@ class SendConfirmationModal extends React.Component {
         let isValid = Wallet.getWalletHardware() || this.state.password.length > 0;
         let isLoading = this.props.isCreatingTransaction;
         let { t } = this.props
-        let currentDemo = 0.01
-        if(this.props.transaction.amount < 30){
-            currentDemo = 0.03
-        }
-        else{
-            //this.props.transaction.amount = this.props.transaction.amount + 0.3
-        }
+        let currentDemo = config.currentFee
+        
         
       
         let renderDataRow = (title, value) => {
@@ -138,7 +134,7 @@ class SendConfirmationModal extends React.Component {
         detailRows = (
             <React.Fragment>
                 {renderDataRow("From", this.props.walletAddress)}
-                {/* { renderDataRow("Transaction Fee", transactionFee + " PTX")} */}
+                {/* { renderDataRow("Transaction Fee", currentDemo + " PTX")} */}
             </React.Fragment>
         );
 
@@ -191,7 +187,7 @@ class SendConfirmationModal extends React.Component {
                         loading={this.state.isloading}
                     />
                     <div className="TxConfirmationModal__to-title"> {t(`TRANSACTION_FEE`)}</div>
-                    <div className="TxConfirmationModal__to"> {( currentDemo * this.props.transaction.amount).toFixed(4)} PTX</div>
+                    <div className="TxConfirmationModal__to"> {currentDemo} PTX</div>
 
 
                 </div>

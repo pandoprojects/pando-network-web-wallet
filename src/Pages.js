@@ -26,7 +26,7 @@ export class Pages extends React.Component {
       
         setTimeout(()=>{
             this.setState({isLoading:true});
-            console.clear();
+             console.clear();
         },1000)
         return (
             
@@ -70,6 +70,7 @@ export class WalletPages extends React.Component {
         const { t } = this.props;
         setTimeout(()=>{
             this.setState({isLoading:true});
+            //  console.clear();
         },1000)
         return (
             <div>

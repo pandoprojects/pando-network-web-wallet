@@ -17,8 +17,7 @@ import Networks from "../constants/Networks";
 // this component is all about the transaction fee ,gas price ,gas limit,invalidAddress,insufficient fund,invalid amount etec associated with etherium network
 export class EthereumNetworkTxForm extends React.Component {
     constructor(props) {
-        super(props);t
-
+        super(props);
         this.state = {
             tokenType: (props.defaultTokenType || TokenTypes.ERC20_PANDO),
             to: '',

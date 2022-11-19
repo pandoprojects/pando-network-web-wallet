@@ -146,11 +146,11 @@ class DepositStakeModal extends React.Component {
                                    
                              
                                     <input type="checkbox" className="dd-input" id="test" />
-                                    <img src="../img/logo/Icon awesome-angle-down.svg" alt="" srcset="" className="imgClass"/>
+                                    <img src="../img/logo/Icon awesome-angle-down.svg" alt="" className="imgClass"/>
                                 </div>
                                 <ul className="dd-menu dropdown-menu">
                                
-                                   <li>
+                                   {/* <li>
                                         <StakePurposeSelectorItem purpose={PandoJS.StakePurposes.StakeForRametronEnterprise}
                                         title={"RAMETRON_NODE_ENTERPRISE"}
                                        
@@ -169,7 +169,7 @@ class DepositStakeModal extends React.Component {
                                         onClick={this.handlePurposeClick}
                                         t={t}
                                     />
-                                   </li>
+                                   </li> */}
 
                                    
                                    <li>

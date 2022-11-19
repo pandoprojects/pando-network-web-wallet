@@ -7,7 +7,7 @@ import Wallet from "../services/Wallet";
 import Api from "../services/Api";
 import { withTranslation } from "react-i18next";
 import config from "../Config";
-
+import Alerts from "../services/Alerts";
 class RewardsPage extends React.Component {
 
     constructor() {
@@ -30,10 +30,12 @@ class RewardsPage extends React.Component {
                 if (i.type < 1) {
 
                     for (let j of i.data.outputs) {
-
-                        if (j.coins.ptxwei > 0) {
+                        let newObj = Object.fromEntries(
+                            Object.entries(j.coins).map(([k, v]) => [k.toLowerCase(), v])
+                        );
+                        if (newObj.ptxwei > 0) {
                             if ((j.address).toLowerCase() == (Wallet.getWalletAddress()).toLowerCase()) {
-                                i.coins = j.coins.ptxwei
+                                i.coins = newObj.ptxwei
                                 rgddc.push(i)
                             }
                         }
@@ -44,7 +46,7 @@ class RewardsPage extends React.Component {
             this.setState({ stackes: rgddc, isFetchingStakes: false })
         }).catch((err) => {
             this.setState({ isFetchingStakes: false })
-            Alerts.showError(err);
+            //);
         })
     }
 

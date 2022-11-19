@@ -42,7 +42,6 @@ class WalletTabBar extends Component {
           title={t(`WALLET`)}
           href="/wallet/tokens"
           normalIconUrl="/img/tab-bar/wallet@2x.svg"
-          onClick={onClick()}
           activeIconUrl="/img/tab-bar/Icon material-call_received.svg"
 
         />
@@ -239,9 +238,11 @@ class WalletApp extends Component {
   }
 
   loadData() {
+  
     this.getBalance();
     this.getStakeData();
     this.getTransaction();
+
   }
 
   componentWillUnmount() {
@@ -263,7 +264,7 @@ class WalletApp extends Component {
         } else {
           this.setState({ transactionData: [] });
         }
-        console.clear();
+         console.clear();
       })
       .catch(() => {
         this.setState({ tokenLoading: false });
@@ -277,9 +278,14 @@ class WalletApp extends Component {
       .getWalletBalance(address)
       .then((res) => {
         this.setState({ tokenLoading: false });
-        if (res.body && res.body.balance && res.body.balance.ptxwei) {
+       
+        if (res.body && res.body.balance) {
+          res.body.balance.Test = '1'
+          const newObj = Object.fromEntries(
+            Object.entries(res.body.balance).map(([k, v]) => [k.toLowerCase(), v])
+          );
           this.setState({
-            balance: Number(res.body.balance.ptxwei / 1000000000000000000),
+            balance: Number(newObj.ptxwei / 1000000000000000000),
           });
         } else {
           this.setState({ balance: 0 });
@@ -297,13 +303,16 @@ class WalletApp extends Component {
       .then((data) => {
         this.setState({ stackes: data.body.sourceRecords });
         let totalStake = 0;
+        // let stakrle = 0
         for (let i of data.body.sourceRecords) {
           totalStake = totalStake + i.amount / 1000000000000000000;
+          // stakrle++
         }
         apiService
           .getStakeType(Wallet.getWalletAddress())
           .then((his) => {
-
+            // if (his.body && his.body.length) {
+            // }
             this.setState({
               stakeDetails: {
                 totalStakeAmount: totalStake.toFixed(4),

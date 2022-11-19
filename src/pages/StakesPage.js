@@ -67,8 +67,10 @@ class StakesPage extends React.Component {
                             for (let j of data.body.sourceRecords) {
 
                                 if (j.holder == i.data.holder.address && j.source == i.data.source.address && j.type == 'rametronenterprisep') {
-
-                                    let tempItem = { '_id': i._id, 'myholder': i.data.holder.address + '_' + i.data.purpose, 'withdrawn': j.withdrawn, 'amount': Number(i.data.source.coins.ptxwei), 'holder': i.data.holder.address, 'source': i.data.source.address, 'type': 'rametronenterprisep', purpose: i.data.purpose }
+                                    let newObj = Object.fromEntries(
+                                        Object.entries(i.data.source.coins).map(([k, v]) => [k.toLowerCase(), v])
+                                    );
+                                    let tempItem = { '_id': i._id, 'myholder': i.data.holder.address + '_' + i.data.purpose, 'withdrawn': j.withdrawn, 'amount': Number(newObj.ptxwei), 'holder': i.data.holder.address, 'source': i.data.source.address, 'type': 'rametronenterprisep', purpose: i.data.purpose }
                                     tempArray.push(tempItem)
                                 }
                             }
@@ -77,32 +79,33 @@ class StakesPage extends React.Component {
                     }
 
                     let finalArray = []
-                    for (let i of data.body.sourceRecords) {
-                        if (i.type != 'rametronenterprisep') {
-                            i.amount = Number(i.amount)
-                            finalArray.push(i)
-                        }
-                    }
-                    for (let i of tempArray) {
-                        finalArray.push(i)
-                    }
                 
-                    //return;
                     const result = Object.values(
-                        finalArray.reduce((acc, item) => {
+                        tempArray.reduce((acc, item) => {
                             acc[item.myholder] = acc[item.myholder]
                                 ? { ...item, amount: item.amount + acc[item.myholder].amount }
                                 : item;
                             return acc;
                         }, {})
-                    ); finalArray
+                    ); 
 
 
-
+                    for (let i of data.body.sourceRecords) {
+                      
+                        if (i.type != 'rametronenterprisep') {
+                        
+                            i.amount = Number(i.amount)
+                            finalArray.push(i)
+                        }
+                    }
+                  for(let i of result)
+                  {
+                    finalArray.push(i)
+                  }
 
                     setTimeout(() => {
                         this.setState({ stakeLoading: false });
-                        this.setState({ stackes: result })
+                        this.setState({ stackes: finalArray })
                     })
                 }
                 else {

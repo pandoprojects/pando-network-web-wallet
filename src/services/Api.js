@@ -147,21 +147,22 @@ export default class Api {
 
     static fetchStakes(address) {
         return axios.get(`${explorerApiUri}/stake/${address}`).then(data => data.data);
-
-    }
+}
+    
 
     static getWalletBalance(address) {
         return axios.get(`${explorerApiUri}/account/update/${address}`).then((data) => data.data)
     }
     static fetchRewards(address) {
         return axios.get(`${explorerApiUri}/rewards/${address}`).then(data => data.data);
+
+       
     }
 
     static getTransactionHistory(address) {//to be changed
         return axios.get(`${explorerApiUri}/accountTx/${address}?type=2?pageNumber=1&limitNumber=100`).then((data) => data.data)
     }
 
-    
     static getSequence(address) {
         return axios.get(`${explorerApiUri}/account/update/${address}`).then(data => data.data);
 
@@ -172,6 +173,9 @@ export default class Api {
         return axios.get(`${explorerApiUri}/staketype/${address}`).then(data => data.data);
       
     }
+
+
+
 
 
     //

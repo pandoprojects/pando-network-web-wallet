@@ -12,10 +12,11 @@ class TransactionHistory extends React.Component {
   }
   calculagteTime = (time) => {
     let fulldate = new Date(Number(time) * 1000);
-    return `${fulldate.getDate()}/${
-      fulldate.getMonth() + 1
-    }/${fulldate.getFullYear()} `;
+    return `${fulldate.getDate()}/${fulldate.getMonth() + 1
+      }/${fulldate.getFullYear()} `;
   };
+
+  
 
   calcualteAmount = (amount) => {
     return amount.toFixed(4);
@@ -74,6 +75,7 @@ class TransactionHistory extends React.Component {
                       <tbody>
                         {this.state.transactionData.length ? (
                           this.state.transactionData.map((val, index) => (
+
                             <tr key={index}>
                               <td>
                                 <a
@@ -88,7 +90,7 @@ class TransactionHistory extends React.Component {
                               <td>{val.block_height}</td>
                               <td className="remove-space">
                                 {val?.data?.outputs[0]?.address.toUpperCase() !=
-                                Number(Wallet.getWalletAddress())
+                                  Number(Wallet.getWalletAddress())
                                   ? `${t("SEND")}`
                                   : `${t(`RECEIVED`)}`}
                               </td>
@@ -136,8 +138,9 @@ class TransactionHistory extends React.Component {
                               </td>
                               <td>
                                 {this.calcualteAmount(
+
                                   val.data.outputs[0].coins.ptxwei /
-                                    1000000000000000000
+                                  1000000000000000000
                                 )}{" "}
                               </td>
                               <td>
@@ -194,8 +197,26 @@ class TransactionHistory extends React.Component {
       .getTransactionHistory(address)
       .then((data) => {
         if (data.body && data.body.length > 0) {
+
+
           let uniqueSet = new Set(data.body.map(JSON.stringify));
           let uniqueArray = Array.from(uniqueSet).map(JSON.parse);
+          for (let i of uniqueArray) {
+
+           
+            i.data.fee = Object.fromEntries(
+              Object.entries(i.data.fee).map(([k, v]) => [k.toLowerCase(), v])
+            );
+           
+            i.data.inputs[0].coins = Object.fromEntries(
+              Object.entries(i.data.inputs[0].coins).map(([k, v]) => [k.toLowerCase(), v])
+            );
+           
+            i.data.outputs[0].coins = Object.fromEntries(
+              Object.entries(i.data.outputs[0].coins).map(([k, v]) => [k.toLowerCase(), v])
+            );
+          }
+         
 
           this.setState({ transactionData: uniqueArray });
         } else {

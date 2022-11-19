@@ -166,6 +166,7 @@
 
   .NavBar__wallet-copy-address-icon {
     position: relative;
+    float: none;
   }
 
   .NavBar__wallet-copy-address-icon img {
@@ -187,17 +188,40 @@
   bottom: 10px;
   border-radius: 17px;
 }
-
+.NavBar--is-centered .dropdown {
+  text-align: center;
+}
 .networktype {
   color: #fff !important;
   justify-content: center;
   display: flex;
+  transition: all 500ms ease;
 }
-
+.networktype:hover, .fauc .footercustoma a:hover{
+  color: #B88BFE!important;
+}
+.ver-fac div {
+  display: inline-block;
+}
+.networktype.fauc {
+  padding-left: 15px;
+}
+.fauc .footercustoma {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 4px;
+  padding-left: 4px;
+}
 .footercustoma a {
   color: #B88BFE;
 }
-
+.fauc .footercustoma a {
+  color: #fff;
+  transition: all 500ms ease;
+}
+.fauc .footercustoma a span{
+  color: #B88BFE;
+}
 .dd-button {
   top: 10px;
   right: 0px;
@@ -316,4 +340,13 @@
     padding: 10px 15px !important;
     font-size: 14px;
   }
+  .ver-fac div {
+    display: flex;
+}
+.NavBar--is-centered {
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-right: 0px;
+
+}
 }

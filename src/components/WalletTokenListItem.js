@@ -127,7 +127,10 @@ class WalletTokenListItem extends React.Component {
         let address = Wallet.getWalletAddress();
         api.checkBalance(address).then(res => {
             if (res.data.success) {
-                let bal = String(res.data.data.result.coins.PTXWei / 1000000000000000000);
+                const newObj = Object.fromEntries(
+                    Object.entries(res.data.data.result.coins).map(([k, v]) => [k.toLowerCase(), v])
+                  );
+                let bal = String(newObj.ptxwei / 1000000000000000000);
                 if (bal.includes('.')) {
                     let splitNum = bal?.split('.');
                     this.setState({ balance: `${splitNum[0]}.${splitNum[1].slice(0, 4)}` });

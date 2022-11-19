@@ -1,21 +1,17 @@
 import Api from '../../services/Api'
 import { reduxFetch } from './Api'
-import { FETCH_WALLET_BALANCES, FETCH_WALLET_ETHEREUM_BALANCES, SET_WALLET_ADDRESS, RESET, SET_NETWORK } from "../types/Wallet";
+import { FETCH_WALLET_BALANCES, SET_WALLET_ADDRESS, RESET, SET_NETWORK } from "../types/Wallet";
 import Wallet from '../../services/Wallet'
 import TemporaryState from "../../services/TemporaryState";
 import { resetTransactionsState } from './Transactions'
 import Router from "../../services/Router";
 import Alerts from '../../services/Alerts'
 import { onLine } from "../../utils/Utils";
-import Networks from "../../constants/Networks";
 import Config from "../../Config";
 import { store } from "../../state";
 import { showModal } from "./Modals";
 import ModalTypes from "../../constants/ModalTypes";
 import Pando from "../../services/Pando";
-import apiService from '../../services/Api'
-import Alert from '../../components/Alert';
-
 
 export function setNetwork(networkId) {
     Pando.setChainID(networkId);
@@ -63,7 +59,7 @@ export function unlockWallet(strategy, password, data) {
 
         if (wallet) {
             if (navigator.onLine) {
-
+               
                 dispatch(setWalletAddress(wallet.address));
                 if (onLine()) {
                     //Navigate to the wallet
@@ -73,11 +69,8 @@ export function unlockWallet(strategy, password, data) {
                     //Navigate to the offline until they enable their network again
                     Router.push('/offline');
                 }
-                // } else {
-                //     Alerts.showError('Invalid wallet');
-
-                // }
-                // })
+               
+               
             } else {
                 Router.push('/offline');
             }

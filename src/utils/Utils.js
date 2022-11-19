@@ -4,6 +4,8 @@
  * @param {Array} vals
  * @return {Object}
  */
+ import _ from "lodash";
+
 export function zipMap(keys, vals) {
     return Object.assign({}, ...keys.map((key, index) => ({ [key]: vals[index] })));
 }

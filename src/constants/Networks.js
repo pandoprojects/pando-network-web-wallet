@@ -1,4 +1,6 @@
 import { zipMap } from "../utils/Utils";
+import _ from "lodash";
+
 
 const Networks = {
     __deprecated__ETHEREUM: 'ethereum',

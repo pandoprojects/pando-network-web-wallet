@@ -33,6 +33,7 @@ class NavBar extends React.Component {
     }
 
     logout() {
+        //apiService.lockWallet({ address: Wallet.getWalletAddress() });
         store.dispatch(logout());
     }
 
@@ -67,7 +68,7 @@ class NavBar extends React.Component {
         }
 
     }
-
+    
 
 
     render() {
@@ -81,12 +82,19 @@ class NavBar extends React.Component {
                         <Link to="/"><img className="NavBar__logo cursor-pointer" src={'/img/logo/pando_wallet_logo@2x.svg'} /></Link>
 
                     </div>
-                    {/*  */}
+{/*  */}
                     <div className="dropdown" >
+                        <div className="ver-fac">
                         <div className="networktype">{config.name}
                             <div className="footercustoma">
                                 <a href={config.githubURL} target="_blank">Version {config.version}</a>
                             </div>
+                        </div>
+                        {/* <div className="networktype fauc">
+                            <div className="footercustoma">
+                            <a href="https://forms.gle/Wt6Zje4J5rm1yUfJ9" target="_blank">Faucet <span>Request</span></a>
+                            </div>
+                        </div> */}
                         </div>
                         <div className="dd-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 
@@ -106,9 +114,9 @@ class NavBar extends React.Component {
 
 
                     </div>
-
+                  
                 </div>
-
+                
 
             </div>
         );

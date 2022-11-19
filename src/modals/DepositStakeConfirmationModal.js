@@ -67,7 +67,7 @@ class DepositStakeConfirmationModal extends React.Component {
             "from": this.props.transaction.from,
             "holder": this.props.transaction.holder,
             "amount": this.props.transaction.amount,
-            "transactionFee": 300000000000000000,
+            "transactionFee": 3000000000000000,
             "purpose": this.props.transaction.purpose
         }
         if (message !== 'Wrong password')
@@ -95,14 +95,14 @@ class DepositStakeConfirmationModal extends React.Component {
                             }
                         }).catch((err) => {
                             this.setState({ isloading: false });
-                            Alerts.showError(err);
+                            Alerts.showError('SOMETHING WENT WRONG');
                         })
                     })
                 }
             })
                 .catch((err) => {
                     this.setState({ isloading: false });
-                    Alerts.showError(err);
+                    Alerts.showError('SOMETHING WENT WRONG');
                 })
         }
 

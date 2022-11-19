@@ -559,10 +559,7 @@
         padding: 15px 30px!important;
         font-size: 14px!important;
     }
-    .NavBar__wallet-copy-address-icon img {
-        height: 15px!important;
-        margin-right: 6px!important;
-    }
+   
     .GradientButton--is-disabled {
         font-size: 16px;
     }

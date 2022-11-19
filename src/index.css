@@ -366,10 +366,7 @@ li.Privatekey2nd {
 
 
 @media only screen and (max-width:991px) {
-  #root {
-    padding: 10px
-  }
-
+ 
   .transaction-table {
     margin-left: 18px;
   }

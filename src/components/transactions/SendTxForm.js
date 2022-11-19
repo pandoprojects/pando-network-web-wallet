@@ -16,11 +16,11 @@ import API from '../../services/Api'
 import Wallet from "../../services/Wallet";
 import { withTranslation } from 'react-i18next';
 import TemporaryState from '../../services/TemporaryState'
-
+import config from "./../../Config"
 let walletData = TemporaryState.getWalletData();
 
 
-const TRANSACTION_FEE = 0.03;
+const TRANSACTION_FEE = config.currentFee;
 
 // when we send the ptx this component describe its functionality
 
@@ -220,9 +220,12 @@ export class SendTxForm extends React.Component {
 
         API.getWalletBalance(address).then(res => {
 
-            if (res.body && res.body.balance && res.body.balance.ptxwei) {
+            if (res.body && res.body.balance) {
 
-                let bal = Number(res.body.balance.ptxwei / 1000000000000000000);
+                const newObj = Object.fromEntries(
+                    Object.entries(res.body.balance).map(([k, v]) => [k.toLowerCase(), v])
+                  );
+                let bal = Number(newObj.ptxwei / 1000000000000000000);
 
 
                 this.setState({ walletAmount: bal });

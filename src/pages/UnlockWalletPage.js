@@ -10,9 +10,12 @@ import { unlockWallet } from "../state/actions/Wallet";
 import { getHardwareWalletAddresses } from "../state/actions/Wallet";
 import { NavLink } from 'react-router-dom'
 import DropZone from '../components/DropZone';
-const classNames = require('classnames');
 import { SET_WALLET_ADDRESS } from "../state/types/Wallet";
 import { withTranslation } from "react-i18next";
+
+
+
+const classNames = require('classnames');
 
 class UnlockWalletViaPrivateKey extends React.Component {
     constructor() {

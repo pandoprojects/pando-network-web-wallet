@@ -16,6 +16,7 @@ import Wallet, { WalletUnlockStrategy } from "../services/Wallet";
 import pando from "../services/Pando";
 import Router from "../services/Router";
 
+
 class WithdrawStakeConfirmationModal extends React.Component {
   paybalAmount = 0;
   constructor() {
@@ -66,7 +67,7 @@ class WithdrawStakeConfirmationModal extends React.Component {
       tokenType: "PTX",
       from: this.props.transaction.from,
       holder: this.props.transaction.holder,
-      transactionFee: 300000000000000000,
+      transactionFee: 3000000000000000,
       purpose: this.props.transaction.purpose,
     };
      
@@ -88,7 +89,7 @@ class WithdrawStakeConfirmationModal extends React.Component {
                   }, 1000);
                 } else {
                   this.setState({ isloading: false });
-                  Alerts.showError('YOU WILL BE ABLE TO WITHDRAW YOUR STAKE AFTER COMPLETING THE LOCKING PERIOD OF ONE YEAR');
+                  Alerts.showError(t(`YOU WILL BE ABLE TO WITHDRAW YOUR STAKE AFTER COMPLETING THE LOCKING PERIOD OF ONE YEAR`));
                 }
               })
               .catch((err) => {

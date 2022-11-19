@@ -22,6 +22,7 @@ import { copyToClipboard } from "../utils/Utils";
 import Alerts from "../services/Alerts";
 const web3 = new Web3("http://localhost");
 
+
 function isReadFunction(functionData) {
   const constant = _.get(functionData, ["constant"], null);
   const stateMutability = _.get(functionData, ["stateMutability"], null);
@@ -170,9 +171,7 @@ function DeployContractForm(props) {
   const jsonInterface = _.get(contract, ["options", "jsonInterface"]);
   const constructor = getConstructor(jsonInterface);
   const constructorInputs = _.get(constructor, ["inputs"], []);
-  // const { t } = this.props;
   window.contract = contract;
-  // const { t } = this.props;
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="FormColumns">
@@ -266,6 +265,7 @@ function InteractWithContractForm(props) {
   const isFunctionReadOnly = isReadFunction(functionData);
 
   const copyAddress =()=> {
+  
     copyToClipboard(address);
     Alerts.showSuccess(t(`YOUR_ADDRESS_HAS_BEEN_COPIED`));
   }
